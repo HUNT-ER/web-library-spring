@@ -1,14 +1,17 @@
 package ru.boldyrev.weblibrarysb.controllers;
 
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.boldyrev.weblibrarysb.models.Worker;
+import ru.boldyrev.weblibrarysb.security.Role;
 import ru.boldyrev.weblibrarysb.services.WorkersService;
 import ru.boldyrev.weblibrarysb.util.validator.WorkerValidator;
 
@@ -30,12 +33,19 @@ public class AdminController {
         return "/admin/index";
     }
 
-    @GetMapping("/worker/new")
+    @GetMapping("/workers")
+    public String showWorkers(Model model) {
+        List<Worker> workers = workersService.findAllByRole(Role.ROLE_WORKER);
+        model.addAttribute("workers", workers);
+        return "/admin/workers";
+    }
+
+    @GetMapping("/workers/new")
     public String doRegistration(@ModelAttribute("worker") Worker worker) {
         return "admin/registration";
     }
 
-    @PostMapping("/worker")
+    @PostMapping("/workers")
     public String register(@ModelAttribute("worker") @Valid Worker worker, BindingResult errors) {
         workerValidator.validate(worker, errors);
 

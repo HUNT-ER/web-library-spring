@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Workers</title>
+</head>
+<body>
+<div th:if="${workers.size() > 0}">
+  <p>Workers:</p>
+  <div th:each="worker : ${workers}">
+    <a th:text="${worker.getName()}" th:href="@{/admin/workers/{id}(id=${worker.getWorkerId()})}">worker</a>
+  </div>
+</div>
+<div th:if="${workers.size() == 0}">
+  <p>Workers list is empty.</p>
+</div>
+<form th:method="get" th:action="@{/admin/workers/new}">
+  <input type="submit" value="Register">
+</form>
+<hr/>
+<form th:method="get" th:action="@{/admin}">
+  <input type="submit" value="Back">
+</form>
+</body>
+</html>

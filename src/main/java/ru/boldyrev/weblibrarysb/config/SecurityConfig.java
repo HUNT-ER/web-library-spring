@@ -17,7 +17,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         final String AUTH_PAGE = "/auth/login";
         http.authorizeHttpRequests(
-                request -> request.requestMatchers(AUTH_PAGE, "/error").permitAll()
+                request -> request.requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers(AUTH_PAGE, "/error").permitAll()
                     .anyRequest().hasAnyRole("ADMIN", "WORKER"))
             .formLogin(
                 form -> form.loginPage(AUTH_PAGE).defaultSuccessUrl("/books", true)
