@@ -8,6 +8,9 @@
 <div style="color: gray">
   <a href="/people">People</a>
   <a href="/books">Books</a>
+  <form th:method="post" th:action="@{/logout}">
+    <input type="submit" value="Logout">
+  </form>
 </div>
 <hr/>
 <div th:each="book : ${books}">
