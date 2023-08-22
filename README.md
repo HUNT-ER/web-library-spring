@@ -1,5 +1,5 @@
-# Web Library API
-This API allows to do basic CRUD operations on Book, assign and release book from person, role system for workers.
+# Web Library
+This project allows to do basic CRUD operations on Books and People, assign and release book from person, role system for workers.
 UI based on HTML and Thymeleaf. 
 
 # Build with
@@ -18,17 +18,30 @@ UI based on HTML and Thymeleaf.
 - change [application.properties](src/main/resources/application.properties.origin) file based on your database configurations
 - run the project using [WebLibrarySbApplication.java](src/main/java/ru/boldyrev/weblibrarysb/WebLibrarySbApplication.java)
 
+# Access to pages
+| Page    |  ADMIN  | WORKER |
+|:--------|:-------:|:------:|
+| Login   |    +    |    +   |
+| Logout  |    +    |    +   |
+| Workers |    +    |    -   |
+| Books   |    +    |    +   |
+| Persons |    +    |    +   |
+
 # API Reference 
+
+## Log in
+**GET** `/auth/login`
+  returns login page
 
 ## Workers operations
 
-**GET** `/workers`
+**GET** `/admin/workers`
   returns page with workers
 
-**GET** `/workers/new`
+**GET** `/admin/workers/new`
   returns page with form to create new worker
 
-**POST** `/workers `
+**POST** `/admin/workers `
   create new worker
 
 ## Books operations
@@ -63,9 +76,31 @@ UI based on HTML and Thymeleaf.
 **POST** `/books/{id}/release`
   release book from person by Id
 
+## People operations
+
+**GET** `/people`
+  returns page of people
+
+**GET** `/people/new`
+   returns page with form to create new person
+
+**GET** `/people/{id}`
+  returns person page by Id
+
+**GET** `/people/{id}/edit`
+  returns page for editing person by Id
+
+**POST** `/people`
+  saves new people
+
+**PATCH** `/people/{id}`
+  updates saved people by Id
+
+**DELETE** `/people/{id}`
+  deletes people by Id
 
 # Entity diagram
-![Модель данных](https://github.com/HUNT-ER/library-model/assets/38404914/27d33c26-fe64-4101-a35b-27dc07e67ab1)
+![web-library](https://github.com/HUNT-ER/web-library-spring/assets/38404914/13e5c78a-762a-4dcd-846c-7c4266cc09de)
 
 # What I learned
-- Improved skills in Spring Boot, unit testing, Docker, Entity relationships, API Architecture
+- Learned Spring MVC, Spring Boot, Spring Security, Thymeleaf
